@@ -1,0 +1,9 @@
+:31000 {
+	handle_path /live-translator/* {
+		reverse_proxy 127.0.0.1:31001
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:30000
+	}
+}

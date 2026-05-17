@@ -1,0 +1,54 @@
+{
+  "name": "foundryvtt-live-translator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/main.mjs",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "check": "node --check src/main.mjs && node --check src/preload.cjs && node --check src/renderer/renderer.js && node --check src/lib/proxy-server.mjs"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.openai.foundryvtt-live-translator",
+    "productName": "FoundryVTT Live Translator",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../services/live-translator-service",
+        "to": "live-translator-service",
+        "filter": [
+          "server.js",
+          "package.json",
+          ".env.example"
+        ]
+      }
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "mac": {
+      "icon": "icon.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "icon": "icon.png",
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
+  }
+}

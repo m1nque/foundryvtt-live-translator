@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FoundryVTT Live Translator</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">FoundryVTT Live Translator</p>
+          <h1>GM Host Control Panel</h1>
+          <p class="lede">Runs the reverse proxy on <code>31000</code> and the DeepL translator service on <code>31001</code>.</p>
+        </div>
+        <button id="restartButton" class="primary">Restart Services</button>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Ports</h2>
+          <form id="configForm" class="stack">
+            <label>
+              <span>Public Reverse Proxy</span>
+              <input name="publicPort" type="number" min="1" max="65535" />
+            </label>
+            <label>
+              <span>Foundry Upstream</span>
+              <input name="foundryPort" type="number" min="1" max="65535" />
+            </label>
+            <label>
+              <span>Translator Upstream</span>
+              <input name="translatorPort" type="number" min="1" max="65535" />
+            </label>
+            <label>
+              <span>Translator Bind Host</span>
+              <input name="translatorBindHost" type="text" />
+            </label>
+            <label>
+              <span>DeepL API Key</span>
+              <input name="deeplApiKey" type="password" autocomplete="off" />
+            </label>
+            <button class="primary" type="submit">Save and Restart</button>
+          </form>
+        </article>
+
+        <article class="card">
+          <h2>Status</h2>
+          <div class="stack">
+            <div class="status-row">
+              <span>Reverse Proxy</span>
+              <strong id="proxyStatus">Checking...</strong>
+            </div>
+            <div class="status-note" id="proxyError"></div>
+            <div class="status-row">
+              <span>Translator Service</span>
+              <strong id="translatorStatus">Checking...</strong>
+            </div>
+            <div class="status-note" id="translatorError"></div>
+            <div class="status-row">
+              <span>Local URL</span>
+              <strong id="publicUrl">-</strong>
+            </div>
+            <div class="status-row">
+              <span>LAN URLs</span>
+              <strong id="lanUrls">-</strong>
+            </div>
+            <div class="status-row">
+              <span>Public Internet URL</span>
+              <strong id="publicInternetUrl">-</strong>
+            </div>
+            <div class="status-note" id="publicInternetError"></div>
+            <div class="status-row">
+              <span>Foundry Module Path</span>
+              <strong><code>/live-translator</code></strong>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+    <script src="./renderer.js"></script>
+  </body>
+  </html>

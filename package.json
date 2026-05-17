@@ -1,0 +1,11 @@
+{
+  "name": "foundryvtt-live-translator-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check foundryvtt-live-translator/scripts/main.js && node --check services/live-translator-service/server.js",
+    "start:service": "node services/live-translator-service/server.js"
+  }
+}

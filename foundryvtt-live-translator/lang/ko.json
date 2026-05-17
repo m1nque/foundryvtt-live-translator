@@ -1,0 +1,22 @@
+{
+  "foundryvtt-live-translator.button.translate": " 번역",
+  "foundryvtt-live-translator.settings.servicePath.name": "Service Path",
+  "foundryvtt-live-translator.settings.servicePath.hint": "companion reverse proxy가 노출하는 path입니다. proxy 설정을 바꾸지 않았다면 기본값 `/live-translator`를 유지하세요.",
+  "foundryvtt-live-translator.settings.targetLanguage.name": "Target Language",
+  "foundryvtt-live-translator.settings.targetLanguage.hint": "대상 언어 코드입니다. 예: KO, EN-US, JA",
+  "foundryvtt-live-translator.settings.sourceLanguage.name": "Source Language",
+  "foundryvtt-live-translator.settings.sourceLanguage.hint": "선택 입력입니다. 비워 두면 auto-detect를 사용합니다.",
+  "foundryvtt-live-translator.errors.missingServicePath": "먼저 모듈 설정에 FoundryVTT Live Translator Service Path를 입력해 주세요.",
+  "foundryvtt-live-translator.errors.nothingToTranslate": "번역할 명칭이나 설명이 없습니다.",
+  "foundryvtt-live-translator.errors.serviceNetwork": "companion translation service 요청에 실패했습니다: {message}",
+  "foundryvtt-live-translator.errors.serviceApi": "companion translation service가 {status} 응답을 반환했습니다: {detail}",
+  "foundryvtt-live-translator.errors.unknown": "알 수 없는 이유로 번역에 실패했습니다.",
+  "foundryvtt-live-translator.dialog.title": "{itemName} 번역",
+  "foundryvtt-live-translator.dialog.name": "번역된 명칭",
+  "foundryvtt-live-translator.dialog.description": "번역된 설명",
+  "foundryvtt-live-translator.dialog.sourceLanguage": "감지된 원문 언어: {language}",
+  "foundryvtt-live-translator.dialog.cache": "출처: {source}",
+  "foundryvtt-live-translator.dialog.unknown": "알 수 없음",
+  "foundryvtt-live-translator.cache.hit": "브라우저 캐시",
+  "foundryvtt-live-translator.cache.live": "companion service"
+}

@@ -1,0 +1,22 @@
+{
+  "foundryvtt-live-translator.button.translate": " Translate",
+  "foundryvtt-live-translator.settings.servicePath.name": "Service Path",
+  "foundryvtt-live-translator.settings.servicePath.hint": "Path exposed by the companion reverse proxy. Keep the default `/live-translator` unless you changed the proxy config.",
+  "foundryvtt-live-translator.settings.targetLanguage.name": "Target Language",
+  "foundryvtt-live-translator.settings.targetLanguage.hint": "Target language code such as KO, EN-US, or JA.",
+  "foundryvtt-live-translator.settings.sourceLanguage.name": "Source Language",
+  "foundryvtt-live-translator.settings.sourceLanguage.hint": "Optional source language code. Leave blank for auto-detect.",
+  "foundryvtt-live-translator.errors.missingServicePath": "Set the FoundryVTT Live Translator service path in module settings first.",
+  "foundryvtt-live-translator.errors.nothingToTranslate": "This item has no name or description to translate.",
+  "foundryvtt-live-translator.errors.serviceNetwork": "Companion translation service request failed: {message}",
+  "foundryvtt-live-translator.errors.serviceApi": "Companion translation service returned {status}: {detail}",
+  "foundryvtt-live-translator.errors.unknown": "Translation failed for an unknown reason.",
+  "foundryvtt-live-translator.dialog.title": "{itemName} Translation",
+  "foundryvtt-live-translator.dialog.name": "Translated Name",
+  "foundryvtt-live-translator.dialog.description": "Translated Description",
+  "foundryvtt-live-translator.dialog.sourceLanguage": "Detected source language: {language}",
+  "foundryvtt-live-translator.dialog.cache": "Source: {source}",
+  "foundryvtt-live-translator.dialog.unknown": "Unknown",
+  "foundryvtt-live-translator.cache.hit": "Browser Cache",
+  "foundryvtt-live-translator.cache.live": "Companion Service"
+}
