@@ -1,0 +1,136 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-module:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build Foundry module release assets
+        run: npm run build
+
+      - name: Upload module artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: module-release
+          path: |
+            dist/release/module.json
+            dist/release/foundryvtt-live-translator.zip
+          if-no-files-found: error
+
+  build-companion-macos:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: companion-app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: companion-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build macOS Apple Silicon companion app
+        run: npm run build:mac
+
+      - name: Upload macOS companion artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: companion-macos-apple-silicon
+          path: |
+            companion-app/dist/*.dmg
+            companion-app/dist/*.zip
+            companion-app/dist/*.blockmap
+          if-no-files-found: error
+
+  build-companion-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: companion-app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: companion-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Windows 64-bit companion app
+        run: npm run build:win
+
+      - name: Upload Windows companion artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: companion-windows-64bit
+          path: |
+            companion-app/dist/*.exe
+            companion-app/dist/*.zip
+            companion-app/dist/*.blockmap
+          if-no-files-found: error
+
+  publish-release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+      - build-module
+      - build-companion-macos
+      - build-companion-windows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download module artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: module-release
+          path: release-artifacts/module
+
+      - name: Download macOS companion artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: companion-macos-apple-silicon
+          path: release-artifacts/companion-app/macos-apple-silicon
+
+      - name: Download Windows companion artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: companion-windows-64bit
+          path: release-artifacts/companion-app/windows-64bit
+
+      - name: Show release artifact layout
+        run: find release-artifacts -type f | sort
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "$tag" --notes "Automated release for $tag"
+          shopt -s globstar nullglob
+          gh release upload "$tag" release-artifacts/**/* --clobber

@@ -41,5 +41,10 @@ function isMacAppleSiliconAsset(file) {
 }
 
 function isWindows64Asset(file) {
-  return /x64\.(exe|zip|blockmap)$/i.test(file) || /win.*x64/i.test(file);
+  return (
+    /\.exe$/i.test(file) ||
+    /(win|setup).*\.zip$/i.test(file) ||
+    /(win|setup|x64).*\.blockmap$/i.test(file) ||
+    /x64/i.test(file)
+  );
 }

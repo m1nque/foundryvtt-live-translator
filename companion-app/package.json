@@ -7,8 +7,8 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
-    "build:mac": "electron-builder --mac dmg zip",
-    "build:win": "electron-builder --win nsis zip",
+    "build:mac": "electron-builder --mac dmg zip --arm64",
+    "build:win": "electron-builder --win nsis zip --x64",
     "check": "node --check src/main.mjs && node --check src/preload.cjs && node --check src/renderer/renderer.js && node --check src/lib/proxy-server.mjs"
   },
   "devDependencies": {

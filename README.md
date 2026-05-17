@@ -15,15 +15,13 @@ FoundryVTT PF2e module workspace for a GM-hosted DeepL translation module with a
 
 ## Quick Start
 
-1. Run `npm run build`
-2. Copy `dist/modules/foundryvtt-live-translator` into Foundry `Data/modules/foundryvtt-live-translator`
-3. On the GM/host machine, copy `services/live-translator-service/.env.example` to `.env`
-4. Set `DEEPL_API_KEY`
-5. Run `npm run start:service`
-6. Start the companion app reverse proxy so public port `31000` fronts Foundry `30000` and translator service `31001`
-7. Enable the module
-8. Open `Game Settings -> Configure Settings -> Module Settings`
-9. Keep `Service Path` as `/live-translator`
+1. Install the module into Foundry at `Data/modules/foundryvtt-live-translator`
+2. Launch the `FoundryVTT Live Translator` companion app
+3. Enter the `DeepL API Key`
+4. Click `Save and Restart`
+5. Enable the `FoundryVTT Live Translator` module in Foundry
+6. Keep the module `Service Path` setting at the default `/live-translator`
+7. Open a PF2e item sheet and use the `Translate` button
 
 ## Build Your Own Companion App
 
@@ -52,6 +50,20 @@ Typical Windows outputs:
 - `FoundryVTT Live Translator Setup <version>.exe`
 - `FoundryVTT Live Translator-<version>-win.zip`
 
+## Automated GitHub Releases
+
+- GitHub Actions workflow: `.github/workflows/release.yml`
+- Trigger:
+  - Push a tag like `v0.1.0`
+  - Or run the workflow manually from the Actions tab
+- What it builds:
+  - Foundry module release assets
+  - Companion app for macOS (Apple Silicon)
+  - Companion app for Windows (64-bit)
+- What happens on tag push:
+  - A GitHub Release is created or updated
+  - Built artifacts are uploaded to that Release automatically
+
 ## Release Layout
 
 - Foundry module release assets are built to `dist/release/`
@@ -63,6 +75,9 @@ Typical Windows outputs:
   - `dist/release/companion-app/macos-apple-silicon/`
   - `dist/release/companion-app/windows-64bit/`
 - Companion app installers can be uploaded to the same GitHub Release as separate assets
+- Recommended release flow:
+  - Use GitHub Actions to build macOS Apple Silicon and Windows 64-bit companion app artifacts
+  - Keep `dist/release/` as the local staging layout that mirrors the release asset structure
 - The module manifest is configured for the GitHub repository:
   - Repository URL: `https://github.com/m1nque/foundryvtt-live-translator`
   - Manifest URL: `https://github.com/m1nque/foundryvtt-live-translator/releases/latest/download/module.json`
