@@ -25,12 +25,43 @@ FoundryVTT PF2e module workspace for a GM-hosted DeepL translation module with a
 8. Open `Game Settings -> Configure Settings -> Module Settings`
 9. Keep `Service Path` as `/live-translator`
 
+## Build Your Own Companion App
+
+### macOS (Apple Silicon)
+
+1. Move into `companion-app/`
+2. Run `npm install`
+3. Build the app with `npm run build:mac`
+4. Output files will appear under `companion-app/dist/`
+
+Typical macOS outputs:
+
+- `FoundryVTT Live Translator-<version>-arm64.dmg`
+- `FoundryVTT Live Translator-<version>-arm64-mac.zip`
+
+### Windows (64-bit)
+
+1. Open the project on a Windows machine
+2. Move into `companion-app/`
+3. Run `npm install`
+4. Build the app with `npm run build:win`
+5. Output files will appear under `companion-app/dist/`
+
+Typical Windows outputs:
+
+- `FoundryVTT Live Translator Setup <version>.exe`
+- `FoundryVTT Live Translator-<version>-win.zip`
+
 ## Release Layout
 
 - Foundry module release assets are built to `dist/release/`
+- Run `npm run build:release` at the project root to rebuild the module and collect companion app assets into the release folder
 - Upload these to a GitHub Release:
   - `module.json`
   - `foundryvtt-live-translator.zip`
+- Companion app installers are collected under:
+  - `dist/release/companion-app/macos-apple-silicon/`
+  - `dist/release/companion-app/windows-64bit/`
 - Companion app installers can be uploaded to the same GitHub Release as separate assets
 - The module manifest is configured for the GitHub repository:
   - Repository URL: `https://github.com/m1nque/foundryvtt-live-translator`

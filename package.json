@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "collect:release": "node scripts/collect-release-assets.mjs",
+    "build:release": "node scripts/build.mjs && node scripts/collect-release-assets.mjs",
     "check": "node --check foundryvtt-live-translator/scripts/main.js && node --check services/live-translator-service/server.js",
     "start:service": "node services/live-translator-service/server.js"
   }

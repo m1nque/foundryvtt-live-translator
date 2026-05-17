@@ -36,6 +36,16 @@ npm run start
 npm run build
 ```
 
+Platform-specific builds:
+
+```bash
+npm run build:mac
+npm run build:win
+```
+
+- `build:mac` is intended for macOS packaging
+- `build:win` is intended for Windows 64-bit packaging
+
 ## Routing Model
 
 - `http://host:31000/` -> Foundry `http://127.0.0.1:30000/`
