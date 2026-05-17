@@ -30,7 +30,7 @@ jobs:
           name: module-release
           path: |
             dist/release/module.json
-            dist/release/foundryvtt-live-translator.zip
+            dist/release/foundryvtt-live-translator-v*.zip
           if-no-files-found: error
 
   build-companion-macos:

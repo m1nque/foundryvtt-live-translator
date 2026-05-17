@@ -10,7 +10,6 @@ const distModulesDir = resolve(distDir, "modules");
 const outputModuleDir = resolve(distModulesDir, moduleId);
 const releaseDir = resolve(distDir, "release");
 const releaseManifestPath = resolve(releaseDir, "module.json");
-const releaseZipPath = resolve(releaseDir, `${moduleId}.zip`);
 
 if (!existsSync(sourceModuleDir)) {
   console.error(`Missing module source directory: ${sourceModuleDir}`);
@@ -22,7 +21,12 @@ mkdirSync(distModulesDir, { recursive: true });
 cpSync(sourceModuleDir, outputModuleDir, { recursive: true });
 mkdirSync(releaseDir, { recursive: true });
 
-writeFileSync(releaseManifestPath, readFileSync(resolve(outputModuleDir, "module.json")));
+const manifest = JSON.parse(readFileSync(resolve(outputModuleDir, "module.json"), "utf8"));
+const version = String(manifest.version ?? "0.0.0").trim();
+const releaseZipName = `${moduleId}-v${version}.zip`;
+const releaseZipPath = resolve(releaseDir, releaseZipName);
+
+writeFileSync(releaseManifestPath, JSON.stringify(manifest, null, 2), "utf8");
 execFileSync("ditto", ["-c", "-k", "--sequesterRsrc", "--keepParent", outputModuleDir, releaseZipPath]);
 
 writeFileSync(

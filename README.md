@@ -70,7 +70,7 @@ Typical Windows outputs:
 - Run `npm run build:release` at the project root to rebuild the module and collect companion app assets into the release folder
 - Upload these to a GitHub Release:
   - `module.json`
-  - `foundryvtt-live-translator.zip`
+  - `foundryvtt-live-translator-v<version>.zip`
 - Companion app installers are collected under:
   - `dist/release/companion-app/macos-apple-silicon/`
   - `dist/release/companion-app/windows-64bit/`
@@ -81,7 +81,7 @@ Typical Windows outputs:
 - The module manifest is configured for the GitHub repository:
   - Repository URL: `https://github.com/m1nque/foundryvtt-live-translator`
   - Manifest URL: `https://github.com/m1nque/foundryvtt-live-translator/releases/latest/download/module.json`
-  - Download URL: `https://github.com/m1nque/foundryvtt-live-translator/releases/latest/download/foundryvtt-live-translator.zip`
+  - Download URL: `https://github.com/m1nque/foundryvtt-live-translator/releases/latest/download/foundryvtt-live-translator-v<version>.zip`
 
 ## Notes
 
